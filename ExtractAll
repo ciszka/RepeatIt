@@ -1,0 +1,33 @@
+#This extracts all the zip files in a folder location
+#This builds on createAllNDVIMasksFromLocation
+#For ease of access use the full file path from the C drive to the folder
+#you are interested in also remember to you / instead of \ so that will need 
+#To be switched if you copy it from another location
+
+extractAll = function(fileLocation){
+  #required libraries
+  require(utils)
+  #Lists all the files in that folder location
+  filesToAnalyze = list.files(fileLocation)
+  numberOfFiles = length(filesToAnalyze)
+  
+  for (i in 1:numberOfFiles) {
+    fullFileName = paste(fileLocation, filesToAnalyze[i], sep = "/", collapse = "")
+    #This gets the extension and is super important as we don't want to try to unzip files that are not zip files
+    #Also we'd rather just not ever worry about them so just skip them even if R would work with thme
+    ext = substr(fullFileName, nchar(fullFileName)-2, nchar(fullFileName))
+    print(fullFileName)
+    if (ext == "ZIP" ||ext == "zip") {
+      #IMPORTANT NOTE The extracted files (and just the extracted files) will save to your WORKING DIRECTORY
+      #They will not save to where the files come from so make sure 
+      #To set an appropriate working directory for where you want the files to go
+      #you can probably change this but I didn't for this iteration because
+      #I just wanted it to do the thing
+      unzip(fullFileName, overwrite = TRUE)
+      print ("It WAS MY TYPE") #This was a check i put in to make sure that things were doing what I wanted it to
+    } else {
+        print ("It wasn't my type")
+      }
+  }  
+  return("did the thing")  
+}
