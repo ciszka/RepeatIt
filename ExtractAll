@@ -1,5 +1,5 @@
 #This extracts all the zip files in a folder location
-#This builds on createAllNDVIMasksFromLocation
+#This builds on createAllNDVIMasksFromLocation by Przystupa
 #For ease of access use the full file path from the C drive to the folder
 #you are interested in also remember to you / instead of \ so that will need 
 #To be switched if you copy it from another location
@@ -8,6 +8,7 @@ extractAll = function(fileLocation){
   #required libraries
   require(utils)
   #Lists all the files in that folder location
+  setwd(fileLocation)
   filesToAnalyze = list.files(fileLocation)
   numberOfFiles = length(filesToAnalyze)
   
@@ -26,8 +27,8 @@ extractAll = function(fileLocation){
       unzip(fullFileName, overwrite = TRUE)
       print ("It WAS MY TYPE") #This was a check i put in to make sure that things were doing what I wanted it to
     } else {
-        print ("It wasn't my type")
-      }
+      print ("It wasn't my type")
+    }
   }  
   return("did the thing")  
 }
